@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="card col-sm-10 col-lg-8" style="border-radius: 0;">
+        <div *ngIf="message==='succes'" class="alert alert-success alert-dismissible fade show" role="alert" style="margin:10px">
+            Opération réussie.
+          </div>
+          <div *ngIf="message==='erreur'" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin:10px">
+            Une erreur s'est produite.
+          </div>
+        <div class="card-header" style="background-color: white;">
+            <h4 *ngIf="typeUser=='user'" align="center">Trouver des utilisateurs</h4>
+            <h4 *ngIf="typeUser=='amis'" align="center">Mes amis</h4>
+        </div>
+        <div class="card-body">
+            <p *ngIf="listUser.length<1 && typeUser=='amis'">*Vous n'avez pas encore d'amis.</p>
+            <table class="table">
+                  <tr *ngFor="let user of listUser" >
+                    <td class="col-2" *ngIf="user._id !=userAuthId">
+                        <a routerLink="./{{user._id}}"><img *ngIf="user.imageUrl" [src]="user.imageUrl" [alt]="user.pseudo"  class="table">
+                        <img *ngIf="!user.imageUrl" 
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png" 
+                        [alt]="user.pseudo" class="img-fluid" class="table">
+                        </a>
+                    </td>
+                    <td *ngIf="user._id !=userAuthId"> 
+                        <div style="height:150px;max-height:150px;">
+                            <span style="font-size: 1.2rem; font-weight:bold; font-style: italic; text-decoration: underline;">@{{user.user}}</span><br>
+                            <b>Description:</b>
+                            <p style="  -webkit-box-orient: vertical;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: normal;">{{user.description}}</p>
+                            <a routerLink="./{{user._id}}" class="d-flex flex-row-reverse" style="text-decoration: none;">détails   </a>
+                        </div>
+                    </td>
+                    <td class="col-1" *ngIf="user._id !=userAuthId"> 
+                        <button *ngIf="typeUser=='user'" (click)="addUser(userAuthId,user._id)" type="button" class="btn btn-outline-primary" style="height:75px ;">ajouter</button>
+                        <button *ngIf="typeUser=='amis'"  type="button" disabled class="btn btn-outline-warning " style="height:38px  ; margin-bottom: 5px;">Amis</button>
+                        <button *ngIf="typeUser=='amis'"  (click)="deleteAmis(user._id)" type="button"  class="btn btn-outline-danger" style="height:37px ;">suppimer</button>
+                    </td>
+                  </tr>
+              </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="card col-sm-10 col-lg-8" style="border-radius: 0;" >
+      <div  *ngIf="monUser && role && modificationEncours===false"> 
+        <div class="card-header row" style="background-color: white;">
+            <h4 align="center" class="col-10">{{monUser.user}}</h4>
+            <button class="col-2" type="button" (click)="modificationEncours=true;" class="btn btn-outline-warning" style="height:40px ;width: 70px;">Editer</button>
+        </div>
+        <div class="card-body row">
+            <div class="col-12 col-md-4 ">
+              <img [src]="monUser.imageUrl" [alt]="monUser.user" class="img-fluid">
+            </div>
+            <div class="col-12 col-md-8">
+              <h4 style="font-weight: bold;">classe</h4>
+              <p class="card-text">{{role.nom}}</p>
+              <h5 style="font-weight: bold;">Description</h5>
+              <p class="card-text">{{monUser.description}}</p>
+            </div>
+        </div>
+      </div>
+
+      <div *ngIf="monUser && role && modificationEncours===true" class="d-flex justify-content-center">
+        <form class="col-10  col-sm-6 " #form="ngForm" (submit)="submit(form)" ngNativeValidate >
+          <div class="mb-3">
+            <label for="email" class="form-label">Url Photo de profile</label>
+            <input type="text" class="form-control" name="imageUrl" id="imageUrl" [(ngModel)]="imageUrl" [ngModel]="monUser.imageUrl" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea [(ngModel)]="description" [ngModel]="monUser.description"[ngModelOptions]="{standalone: true}" class="form-control" id="description" rows="13">
+            </textarea>
+          </div>
+          <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <form class="col-10 col-sm-6 col-md-4 col-lg-3" #form="ngForm" (submit)="submit(form)" ngNativeValidate >
+        <div class="mb-3">
+            <label for="Pseudo" class="form-label">Pseudo</label>
+            <input type="text" class="form-control" name="pseudo" id="pseudo" [(ngModel)]="pseudo" placeholder="Pseudo"required>
+        </div>
+        <div class="mb-3">
+          <label for="role" class="form-label">role</label>
+          <select class="form-select" name="role" aria-label="role"  [(ngModel)]="role" required>
+            <option  value="" selected disabled hidden>Sélectionez votre role</option>
+            <option *ngFor="let role of listRole" [ngValue]="role._id">{{role.nom}}</option>
+          </select>        
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Url Photo de profile</label>
+          <textarea [(ngModel)]="imageUrl" [ngModelOptions]="{standalone: true}" class="form-control" id="imageUrl" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" id="email" [(ngModel)]="email" placeholder="dupond.michel@azerty.fr" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="*****" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea [(ngModel)]="description" [ngModelOptions]="{standalone: true}" class="form-control" id="description" rows="3"></textarea>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br><a routerLink="../login">J'ai déjà un compte.</a>
+        </div>
+        
+      </form>
+</div>

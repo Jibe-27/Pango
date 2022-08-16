@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+    <div class="card col-sm-10 col-lg-8" style="border-radius: 0;" >
+      <div *ngIf="message==='succes'" class="alert alert-success alert-dismissible fade show" role="alert" style="margin:10px">
+        Opération réussie.
+      </div>
+      <div *ngIf="message==='erreur'" class="alert alert-danger alert-dismissible fade show" role="alert" style="margin:10px">
+        Une erreur s'est produite.
+      </div>
+      <div > 
+        <div class="card-header row" style="background-color: white;">
+            <h4 align="center" class="col-7 col-md-9">{{user.user}}</h4>
+            <button *ngIf="!estMonAmis" type="button" (click)="addUser()" class="btn btn-outline-primary col-2" style="height:40px ;width: 80px;">Ajouter</button>
+            <button *ngIf="estMonAmis" type="button"  disabled class="btn btn-outline-warning col-2 col-md-2" style="height:40px; width: auto;">Ami</button>
+            <button *ngIf="estMonAmis" type="button" (click)="deleteAmis()"  class="btn btn-outline-danger col-2 col-md-2" style="height:40px; width: auto; margin-left: 2px;">supprimer</button>
+        </div>
+        <div class="card-body row">
+            <div class="col-12 col-md-4 ">
+              <img [src]="user.imageUrl" [alt]="user.user" class="img-fluid">
+            </div>
+            <div class="col-12 col-md-8">
+              <h4 style="font-weight: bold;">classe</h4>
+              <p class="card-text">{{roleUser.nom}}</p>
+              <h5 style="font-weight: bold;">Description</h5>
+              <p class="card-text">{{user.description}}</p>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
