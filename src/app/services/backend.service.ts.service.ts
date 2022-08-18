@@ -42,4 +42,7 @@ export class BackendService {
    return '/api/amis/'+id;
 
   }
+  getPostNewUserAmis(id:string){
+    return '/api/amis/addAmi/'+id;
+  }
 }

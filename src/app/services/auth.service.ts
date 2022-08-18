@@ -29,11 +29,11 @@ export class AuthService{
     checkAuth(){
         if(localStorage.getItem('id')){
             this.isAuth=true;
+            return true;
         }
         else{
             return false;
         }
-       return this.isAuth;
     } 
 getId(){
     if(localStorage.getItem('id')){

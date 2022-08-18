@@ -49,15 +49,33 @@ export class SignupComponent implements OnInit {
       description:this.description,
       role: form.value.role,
       email: form.value.email.toLowerCase(),
-      password:form.value.password}).subscribe((reponse)=> {
+      password:form.value.password,
+    verifier:'false'}).subscribe((reponse)=> {
 
-      this.http.post(this.backendService.getRouteLogin(),
+      if(!this.authService.checkAuth()){
+        this.http.post(this.backendService.getRouteLogin(),
       {email: form.value.email.toLowerCase(),
         password:form.value.password}).subscribe((reponse)=> {
         this.authService.signIn(reponse);
       },(error)=>{
         console.log('Erreur:',error)
       });
+      }else{
+        this.http.post(this.backendService.getRouteLogin(),
+        {email: form.value.email.toLowerCase(),
+          password:form.value.password}).subscribe((reponse:any)=> {
+
+          this.http.post(this.backendService.getPostRouteAmi(),{userDemandeur:this.authService.getId(),user:reponse.userId}).subscribe((reponse)=>{
+            this.ngOnInit();
+            
+              },(error)=>{
+                console.log(error)
+              });
+            
+        },(error)=>{
+          console.log('Erreur:',error)
+        });
+      }
     },(error)=>{
       console.log('Erreur:',error)
     });
