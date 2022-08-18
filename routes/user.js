@@ -6,7 +6,7 @@ router.post('/signup',userCtrl.signup);
 router.post('/login',userCtrl.login);
 router.get('/',userCtrl.getAllUsers);
 router.get('/:id',userCtrl.getOneUser);
-
+router.get('/signup/:id',userCtrl.getNewOneUser);
 router.put('/:id',userCtrl.modifyUser);
 // router.delete('/:id',userCtrl.deleteUser);
 

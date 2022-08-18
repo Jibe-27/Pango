@@ -66,11 +66,17 @@ exports.getOneUser=(req,res,next)=>{
     .then(users=>res.status(200).json(users))
     .catch(error=>res.status(400).json({error}));
 };
+exports.getNewOneUser=(req,res,next)=>{
+  User.findOne({email: req.params.email})
+  .then(users=>res.status(200).json(users))
+  .catch(error=>res.status(400).json({error}));
+};
 exports.modifyUser=(req,res,next)=>{
     User.updateOne({_id:req.params.id}, {...req.body, _id:req.params.id})
     .then(()=> res.status(200).json({message:'Objet Modifié'}))
     .catch(error=>res.status(400).json({error}));
 };
+
 exports.deleteUsers=(req,res,next)=>{
     User.deleteOne({_id:req.params.id})
     .then(()=>res.status(200).json({message:'Objet supprimé'}))
